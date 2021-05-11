@@ -1,0 +1,71 @@
+form {
+  padding-top: 100px !important;
+  width: 50% !important;
+  margin: auto !important;
+  text-align: center;
+}
+
+form h1 {
+  color: #f1faee !important;
+}
+
+.form-label {
+  color: #48cae4 !important;
+}
+
+.form-group {
+  width: 400px !important;
+  margin: auto;
+  margin-top: 20px !important; 
+}
+
+.description-group {
+  margin-top: 20px !important;
+}
+
+.form-control {
+  width: 250px !important;
+  height: 40px !important;
+  margin-top: 10px !important;
+  margin: auto;
+}
+
+textarea.form-control {
+  width: 400px !important;
+  height: auto !important;
+}
+
+.btn-primary {
+  color: #f1faee !important;
+  background-color: #457b9d !important;
+  margin-top: 30px !important;
+  width: 150px;
+  height: 50px;
+  border: none !important;
+}
+
+.btn-primary:hover {
+  background-color: #48cae4 !important;
+}
+
+.back-img {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("../forms/oblozhka.jpg");
+  height: 895px;
+  width: 100%;
+}
+
+.back-img2 {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("../forms/oblozhka2.jpg");
+  height: 895px;
+  width: 100%;
+}

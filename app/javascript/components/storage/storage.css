@@ -1,0 +1,17 @@
+.storage-list {
+  list-style: none;
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+  display: inline;
+}
+
+.storage-list li {
+  display: inline-block;
+}
+
+.card {
+  width: 300px;
+  height: 350px;
+  margin: 20px;
+}

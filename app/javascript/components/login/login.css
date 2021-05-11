@@ -1,0 +1,14 @@
+.login-form .form-group {
+  width: 300px !important;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-top: 20px;
+} 
+
+.login-form {
+  width: 40% !important;
+}
+
+.login-form .btn-primary {
+  margin-right: 50px;
+}

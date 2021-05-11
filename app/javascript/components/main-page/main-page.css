@@ -1,0 +1,44 @@
+
+.table {
+  width: 80% !important;
+  margin: auto !important;
+}
+
+.table th {
+  color: #f1faee !important;
+  background-color: #457b9d !important;
+  font-weight: bold !important;
+}
+
+.table-responsive {
+  margin-top: 50px !important;
+}
+
+.table td {
+  white-space: normal !important; 
+  word-wrap: break-word !important;
+  background-color: rgba(72, 202, 228, 0.5) !important;
+}
+
+table.table-bordered{
+  border:1px solid black;
+}
+
+table.table-bordered > thead > tr > th{
+  border:1px solid black;
+}
+table.table-bordered > tbody > tr > td{
+  border:1px solid black;
+}
+
+body {
+  background-color: #f1faee !important;
+}
+
+.header-main {
+  text-align: center;
+  margin: auto;
+  width: auto;
+  color: #457b9d !important;
+  margin-top: 50px;
+}

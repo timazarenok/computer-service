@@ -1,0 +1,2 @@
+module ApplicationBlankHelper
+end
