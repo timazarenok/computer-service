@@ -54,13 +54,13 @@ class App extends Component {
     return (
       <Router>
         <Header isLog={isLoggedIn} user={user} logout={this.handleLogout} />
+        <Route exact path="/reg">
+          <Singup handleLogin={this.handleLogin} isLog={isLoggedIn} />
+        </Route>
+        <Route exact path="/login">
+          <Login handleLogin={this.handleLogin} isLog={isLoggedIn} />
+        </Route>
         <Switch>
-          <Route exact path="/singup">
-            <Singup handleLogin={this.handleLogin} isLog={isLoggedIn} />
-          </Route>
-          <Route exact path="/login">
-            <Login handleLogin={this.handleLogin} isLog={isLoggedIn} />
-          </Route>
           <Route exact path="/" component={Main} />
           <Route exact path="/service-add" component={ServiceForm} />
           <Route exact path="/application-add" component={ApplicationForm} />

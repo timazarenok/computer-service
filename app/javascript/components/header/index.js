@@ -27,9 +27,14 @@ const Header = ({ isLog, user, logout }) => (
         </Link>
       </Nav.Item>
     ) : (
-      <Nav.Item>
-        <Link to="/login">Войти</Link>
-      </Nav.Item>
+      <>
+        <Nav.Item>
+          <Link to="/login">Войти</Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Link to="/reg">Регистрация</Link>
+        </Nav.Item>
+      </>
     )}
   </Nav>
 );

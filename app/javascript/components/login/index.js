@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Form, Row } from "react-bootstrap";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 import "./login.css";
 
@@ -90,7 +90,6 @@ const Login = (props) => {
       <Button placeholder="submit" type="submit">
         Войти
       </Button>
-      <Button onClick={() => props.history.push("/signup")}>Регистрация</Button>
     </Form>
   );
 };

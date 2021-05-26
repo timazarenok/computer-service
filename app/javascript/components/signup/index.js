@@ -12,13 +12,7 @@ const Singup = (props) => {
     password: "",
     password_confirmation: "",
   });
-
-  useEffect(() => {
-    if(props.isLog){
-      props.history.push("/");
-    }
-  }, [])
-
+  
   const [errors, setErrors] = useState([]);
 
   const handleChange = (event) => {
