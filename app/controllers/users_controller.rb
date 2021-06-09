@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-    
   def index
       @users = User.all
          if @users
@@ -13,7 +12,7 @@ class UsersController < ApplicationController
         }
        end
   end
-def show
+    def show
      @user = User.find(params[:id])
          if @user
             render json: {
@@ -34,7 +33,7 @@ def show
                render json: {
                status: :created,
                user: @user
-           }
+                }
           else 
               render json: {
               status: 500,

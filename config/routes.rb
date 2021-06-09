@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :service, only: %i[create index show update destroy]
   resources :applications, only: %i[create index update destroy]
+  resources :application_services, only: %i[create index update destroy]
   
   post '/login',    to: 'sessions#create'
   post '/logout',   to: 'sessions#destroy'

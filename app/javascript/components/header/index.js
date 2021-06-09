@@ -9,17 +9,23 @@ const Header = ({ isLog, user, logout }) => (
     <Nav.Item>
       <Link to="/">Главная</Link>
     </Nav.Item>
-    <Nav.Item>
-      <Link to="/storage">Товары</Link>
-    </Nav.Item>
+    {
+      user.username === "admin" ? (<Nav.Item>
+        <Link to="/storage">Товары</Link>
+      </Nav.Item>
+      ) : null
+    }
     {user.username === "admin" ? (
       <Nav.Item>
         <Link to="/service-add">Новая услуга</Link>
       </Nav.Item>
     ) : null}
-    <Nav.Item>
-      <Link to="/application-add">Ремонт</Link>
-    </Nav.Item>
+    {
+      user.username !== "admin" ? (
+      <Nav.Item>
+        <Link to="/application-add">Ремонт</Link>
+      </Nav.Item>) : null
+    }
     {isLog ? (
       <Nav.Item>
         <Link to="/" onClick={logout}>

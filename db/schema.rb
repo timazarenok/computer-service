@@ -10,21 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_11_115208) do
+ActiveRecord::Schema.define(version: 2021_06_07_110252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "application_services", force: :cascade do |t|
+    t.bigint "service_id", null: false
+    t.bigint "application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["application_id"], name: "index_application_services_on_application_id"
+    t.index ["service_id"], name: "index_application_services_on_service_id"
+  end
 
   create_table "applications", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.string "phone"
-    t.bigint "service_id", null: false
     t.string "firstname"
     t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["service_id"], name: "index_applications_on_service_id"
+    t.boolean "status"
   end
 
   create_table "services", force: :cascade do |t|
@@ -43,5 +51,6 @@ ActiveRecord::Schema.define(version: 2021_05_11_115208) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "applications", "services"
+  add_foreign_key "application_services", "applications"
+  add_foreign_key "application_services", "services"
 end

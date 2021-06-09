@@ -15,7 +15,7 @@ class ApplicationsController < ApplicationController
   
   def create
     application = Application.new(application_params)
-  
+
     if application.save
       render json: ApplicationSerializer.new(application, options).serialized_json
     else
@@ -46,10 +46,10 @@ class ApplicationsController < ApplicationController
   private
   
   def options
-    @options ||= { include: %i[service] }
+    @options ||= { include: %i[services] }
   end
 
   def application_params
-    params.require(:application).permit(:name, :description, :date, :phone, :firstname, :service_id)
+    params.require(:application).permit(:name, :description, :date, :phone, :firstname, :status)
   end
 end

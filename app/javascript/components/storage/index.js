@@ -6,15 +6,21 @@ import "./storage.css";
 
 const Storage = () => {
   const [applications, setApplications] = useState([]);
+  const [included, setIncluded] = useState([]);
 
   useEffect(() => {
+    updateData();
+  }, [applications.length, included.length]);
+  
+  const updateData = () => {
     axios
       .get("/applications")
       .then((response) => {
         setApplications(response.data.data);
+        setIncluded(response.data.included)
       })
       .catch((err) => console.log(err));
-  }, [applications.length]);
+  }
 
   return (
     <ul className="storage-list">
@@ -22,7 +28,9 @@ const Storage = () => {
         <li key={el.attributes.id}>
           <StorageItem
             {...el.attributes}
-            service_id={el.relationships.service.data.id}
+            services={el.relationships.services.data}
+            included={included}
+            updateData={updateData}
           />
         </li>
       ))}

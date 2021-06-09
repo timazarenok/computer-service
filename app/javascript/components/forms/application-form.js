@@ -7,12 +7,13 @@ const ApplicationForm = () => {
     name: "",
     description: "",
     phone: "",
-    service_id: 0,
     firstname: "",
     date: "",
   });
 
+  const [services_ids, setServicesIds] = useState([]);
   const [services, setServices] = useState([]);
+  const [clicked, setClicked] = useState(false)
 
   useEffect(() => {
     axios
@@ -21,13 +22,25 @@ const ApplicationForm = () => {
         setServices(response.data.data);
       })
       .catch((err) => console.log(err));
-      console.log(services)
-  }, [services.length]);
+  }, [services.length, services_ids.length]);
 
   const handleChange = (e) => {
     e.preventDefault();
     setApplication({ ...application, [e.target.name]: e.target.value });
   };
+
+  const onChangeIds = (e) => {
+    const { name, checked } = e.target;
+    let newServices = [...services_ids];
+    if(checked){
+      newServices.push(name);
+    }
+    else {
+      const index = newServices.indexOf(name);
+      newServices.splice(index, 1);
+    }
+    setServicesIds(newServices)
+  }
 
   const addApplication = (e) => {
     e.preventDefault();
@@ -41,10 +54,21 @@ const ApplicationForm = () => {
           name: "",
           description: "",
           phone: "",
-          service_id: 0,
           firstname: "",
           date: "",
+          status: false
         });
+        services_ids.map(el => {
+          axios
+          .post("/application_services", { 
+            service_id: el,
+            application_id: response.data.data.attributes.id
+           })
+          .then((response) => {
+    
+           })
+          .catch((err) => console.log(err));
+        })
       })
       .catch((err) => console.log(err));
   };
@@ -83,18 +107,17 @@ const ApplicationForm = () => {
           </Form.Group>
           <Form.Group>
             <Form.Label>Услуга</Form.Label>
-            <Form.Control
-              as="select"
-              value={application.service_id}
-              name="service_id"
-              onChange={handleChange}
-            >
+            <Button className="application-button" onClick={() => setClicked(!clicked)}>Выбрать услуги</Button>
+            <ul className={`dropdown-menu checkbox-menu ${clicked ? "show" : ""}`}>
               {services.map((el) => (
-                <option key={el.attributes.id} value={el.attributes.id}>
-                  {el.attributes.name}
-                </option>
+                <li>
+                  <label>
+                    <input type="checkbox" onChange={onChangeIds} name={el.attributes.id} />
+                    {el.attributes.name}
+                  </label>
+                </li>
               ))}
-            </Form.Control>
+            </ul>
           </Form.Group>
         </Row>
         <Row>
