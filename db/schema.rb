@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_07_110252) do
+ActiveRecord::Schema.define(version: 2021_06_10_055941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,24 @@ ActiveRecord::Schema.define(version: 2021_06_07_110252) do
     t.boolean "status"
   end
 
+  create_table "masters", force: :cascade do |t|
+    t.string "name"
+    t.string "telephone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "application_id", null: false
+    t.bigint "master_id", null: false
+    t.decimal "result"
+    t.integer "days"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["application_id"], name: "index_orders_on_application_id"
+    t.index ["master_id"], name: "index_orders_on_master_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -53,4 +71,6 @@ ActiveRecord::Schema.define(version: 2021_06_07_110252) do
 
   add_foreign_key "application_services", "applications"
   add_foreign_key "application_services", "services"
+  add_foreign_key "orders", "applications"
+  add_foreign_key "orders", "masters"
 end

@@ -114,3 +114,19 @@ textarea.form-control {
   display: block !important;
   margin: auto;
 }
+
+.master-form {
+  padding-top: 0px !important;
+  width: 50% !important;
+  margin: auto !important;
+  text-align: center;
+}
+
+.masters-list {
+  display: inline;
+  list-style: none;
+}
+
+.masters-list li {
+  display: inline-block;
+}

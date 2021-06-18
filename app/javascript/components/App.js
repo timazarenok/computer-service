@@ -7,7 +7,11 @@ import Main from "./main-page";
 import Storage from "./storage";
 import Login from "./login";
 import Singup from "./signup";
+import Footer from './footer';
 import axios from "axios";
+import MyMap from './map'
+import MasterForm from './forms/master-from'
+import UserApplications from "./user-applications";
 
 class App extends Component {
   constructor(props) {
@@ -60,12 +64,18 @@ class App extends Component {
         <Route exact path="/login">
           <Login handleLogin={this.handleLogin} isLog={isLoggedIn} />
         </Route>
+        <Route exact path="/user-app">
+          <UserApplications user={user} />
+        </Route>
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/service-add" component={ServiceForm} />
           <Route exact path="/application-add" component={ApplicationForm} />
           <Route exact path="/storage" component={Storage} />
+          <Route exact path="/masters" component={MasterForm} />
         </Switch>
+        <Footer />
+        <MyMap />
       </Router>
     );
   }

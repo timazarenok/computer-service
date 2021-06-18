@@ -19,3 +19,9 @@ a {
 a:hover {
   color: #48cae4 !important;
 }
+
+.navbar-brand {
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 700px !important;
+}

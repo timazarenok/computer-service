@@ -2,6 +2,7 @@
 .table {
   width: 80% !important;
   margin: auto !important;
+  margin-bottom: 50px !important;
 }
 
 .table th {

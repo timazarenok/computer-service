@@ -14,7 +14,6 @@ const StorageItem = ({
   status,
   services,
   included,
-  updateData
 }) => {
 
   const [serviceItems, setServiceItems] = useState([])
@@ -22,18 +21,6 @@ const StorageItem = ({
   useEffect(() => {
     common(included, services)
   }, [services.length, included.length])
-
-  const updateStatus = () => {
-    const application = {
-      status: true,
-    }
-
-    axios.put("/applications/" + id, application)
-      .then(response => {
-        updateData();
-      })
-      .catch(err => console.log(err))
-  }
 
   const common = (arr1, arr2) => {
     let newArr = [];
@@ -57,7 +44,7 @@ const StorageItem = ({
               {
                 serviceItems.map(el => (
                   <h5 key={el}>{el}</h5>
-                ))  
+                ))
               }
             </ul>
             <h5>Номер: {id}</h5>
@@ -68,9 +55,6 @@ const StorageItem = ({
             <Card.Text>{phone}</Card.Text>
             <Card.Text>{date}</Card.Text>
             <Card.Text>{status ? "Обработан" : "Не обработан"}</Card.Text>
-            {
-              status ? null : <Button className="storage-button" onClick={updateStatus}>Передать на ремонт</Button>
-            }
           </Card.Body>
         </Card>
       )}

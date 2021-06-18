@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Form, FormControl, Row, Button } from "react-bootstrap";
+import InputMask from "react-input-mask";
 
 const ApplicationForm = () => {
   const [application, setApplication] = useState({
@@ -14,6 +15,21 @@ const ApplicationForm = () => {
   const [services_ids, setServicesIds] = useState([]);
   const [services, setServices] = useState([]);
   const [clicked, setClicked] = useState(false)
+  const [error, setError] = useState("");
+
+  const formatDate = (date) => {
+    var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [month, day, year].join('/');
+}
 
   useEffect(() => {
     axios
@@ -22,7 +38,7 @@ const ApplicationForm = () => {
         setServices(response.data.data);
       })
       .catch((err) => console.log(err));
-  }, [services.length, services_ids.length]);
+  }, [services.length, services_ids.length, error.length]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -32,7 +48,7 @@ const ApplicationForm = () => {
   const onChangeIds = (e) => {
     const { name, checked } = e.target;
     let newServices = [...services_ids];
-    if(checked){
+    if (checked) {
       newServices.push(name);
     }
     else {
@@ -42,35 +58,51 @@ const ApplicationForm = () => {
     setServicesIds(newServices)
   }
 
+  const checkDates = (date1, date2) => {
+    date1 = new Date(date1);
+    date2 = new Date(date2);
+    if(date1.getMonth() > date2.getMonth() || date1.getDate() > date2.getDate()) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   const addApplication = (e) => {
     e.preventDefault();
     const csrfToken = document.querySelector("[name=csrf-token]").content;
     axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken;
+    if (checkDates(formatDate(new Date().getTime()), application.date)) {
+      setError("Неверная дата");
+    }
+    else {
+      axios
+        .post("/applications", { application })
+        .then((response) => {
+          setApplication({
+            name: "",
+            description: "",
+            phone: "",
+            firstname: "",
+            date: "",
+            status: false
+          });
+          setError("");
+          services_ids.map(el => {
+            axios
+              .post("/application_services", {
+                service_id: el,
+                application_id: response.data.data.attributes.id
+              })
+              .then((response) => {
 
-    axios
-      .post("/applications", { application })
-      .then((response) => {
-        setApplication({
-          name: "",
-          description: "",
-          phone: "",
-          firstname: "",
-          date: "",
-          status: false
-        });
-        services_ids.map(el => {
-          axios
-          .post("/application_services", { 
-            service_id: el,
-            application_id: response.data.data.attributes.id
-           })
-          .then((response) => {
-    
-           })
-          .catch((err) => console.log(err));
+              })
+              .catch((err) => console.log(err));
+          })
         })
-      })
-      .catch((err) => console.log(err));
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -94,14 +126,20 @@ const ApplicationForm = () => {
               name="date"
               onChange={handleChange}
             />
+            {
+              error.length > 0 ? <span style={{color: "red"}}>{error}</span> : null
+            }
           </Form.Group>
         </Row>
         <Row>
           <Form.Group>
             <Form.Label>Контактный номер</Form.Label>
-            <FormControl
+            <InputMask
+              className="form-control"
+              mask="+375 (99) 999-99-99"
               value={application.phone}
               name="phone"
+              placeholder="+375 (99) 99-99-99"
               onChange={handleChange}
             />
           </Form.Group>

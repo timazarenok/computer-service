@@ -1,0 +1,17 @@
+.footer {
+  padding-left: 200px;
+  padding-top: 20px;
+  height: 25vh;
+  width: 100%;
+  background-color: #457b9d;
+}
+
+.footer h3 {
+  color: #f1faee;
+  margin: 0;
+}
+
+.footer a, span {
+  color: white;
+  margin: 0;
+}

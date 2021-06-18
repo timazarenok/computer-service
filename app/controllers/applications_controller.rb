@@ -15,6 +15,8 @@ class ApplicationsController < ApplicationController
   
   def create
     application = Application.new(application_params)
+    application.user = current_user
+    application.status = false
 
     if application.save
       render json: ApplicationSerializer.new(application, options).serialized_json
